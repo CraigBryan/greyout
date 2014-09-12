@@ -1,0 +1,22 @@
+body {background-color: black;}
+
+#container
+{
+  margin: 0 auto; width: 900px;
+}
+
+.imageContainer 
+{
+  margin: 0 100; 
+}
+
+.test-image
+{
+  max-width: 700px; max-height: 900px; width: auto; height: auto; display: block;
+}
+
+/* Styles for the greyout */
+.greyout
+{
+  background-color: gray; opacity: 0.9; position: absolute;
+}
