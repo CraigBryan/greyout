@@ -16,9 +16,20 @@
 
     <div id="container">
       <div class="imageContainer">
-        <img src="test_image.jpg" class="test-image" data-greyout="This is the caption text"/>
+        <img src="test_image.jpg" class="test-image" id="test1" />
+      </div>
+    </div>
+
+    <div id="container2">
+      <div class="imageContainer">
+        <img src="test_image_2.jpg" class="test-image" id="test2" />
       </div>
     </div>
   </body>
+
+  <script type="text/javascript">
+    new Greyout(jQuery("#test1"), "<div class='caption-box'><p>This is the caption stuff!</p></div>");
+    new Greyout(jQuery("#test2"), "<div class='caption-box'><h1>Adventure Time!</h1></div>");
+  </script>
 
 </html>

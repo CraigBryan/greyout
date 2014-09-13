@@ -5,6 +5,11 @@ body {background-color: black;}
   margin: 0 auto; width: 900px;
 }
 
+#container2
+{
+  margin: 0 auto; width: 900px;
+}
+
 .imageContainer 
 {
   margin: 0 100; 
@@ -15,8 +20,15 @@ body {background-color: black;}
   max-width: 700px; max-height: 900px; width: auto; height: auto; display: block;
 }
 
+.caption-box
+{
+  margin: 0 auto;
+}
+
+h1, p { text-align: center;}
+
 /* Styles for the greyout */
-.greyout
+.greyout-box
 {
   background-color: gray; opacity: 0.9; position: absolute;
 }

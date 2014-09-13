@@ -1,55 +1,56 @@
 //Script to have nice caption text fade in over an image
-//TODO remove jQuery dependency
-//TODO is custom attribute for img best way to go?
+//TODO remove jquery dependency?
 
-var Greyout = new Object();
-
-jQuery(document).ready(function() {
-  console.log("READY!");
-  console.log("SET!");
-  console.log("GO!");
-  Greyout.init(".test-image");
-});
-
-Greyout.init = function(selector, html)
+function Greyout(obj, captionHtml)
 {
-  Greyout.element = jQuery(selector);
-  Greyout.element.mouseenter(Greyout.greyout);
-  Greyout.html = html;
-};
+  var that = this;
 
-Greyout.greyout = function() 
-{
-  if(!Greyout.entered)
+  this.greyout = function() 
   {
-    Greyout.entered = true;
-    var width = Greyout.element.width();
-    var height = Greyout.element.height();
-    var left = Greyout.element.offset().left;
-    var top = Greyout.element.offset().top;
-    var zIndex = Greyout.element.css('z-index');
-    var text = Greyout.element.attr('data-greyout');
-
-    if(zIndex !== "auto")
+    if(!that.entered)
     {
-      zIndex = parseInt(zIndex) + 1;
+      that.entered = true;
+      var width = that.element.width();
+      var height = that.element.height();
+      var left = that.element.offset().left;
+      var top = that.element.offset().top;
+      var zIndex = that.element.css('z-index');
+      var text = that.element.attr('data-greyout');
+
+      if(zIndex !== "auto")
+      {
+        zIndex = parseInt(zIndex) + 1;
+      }
+
+      var greybox_markup = "<div style='width:" + width 
+        + "; height:" + height 
+        + "; left:" + left 
+        + "; top:" + top 
+        + "; z-index:" + zIndex 
+        + ";' class='greyout-box'></div>";
+
+      that.greybox = that.element.after(greybox_markup).next();
+      that.greybox.html(captionHtml);
+      that.greybox.mouseleave(that.greyin);
     }
+  };
 
-    var greybox = "<div style='width:" + width 
-      + "; height:" + height 
-      + "; left:" + left 
-      + "; top:" + top 
-      + "; z-index:" + zIndex 
-      + ";' class='greyout'></div>";
+  this.greyin = function()
+  {
+    that.greybox.remove();
+    that.entered = false;
+  };
 
-    Greyout.greybox = Greyout.element.after(greybox).next();
-    Greyout.greybox.html("<p>" + text +"</p>");
-    Greyout.greybox.mouseleave(Greyout.greyin);
-  }
-};
+  this.element = null;
+  this.id = null;
+  this.entered = false;
+  this.greybox = null;
 
-Greyout.greyin = function()
+  this.element = obj;
+  this.element.mouseenter(this.greyout);
+}
+
+function check()
 {
-  Greyout.greybox.remove();
-  Greyout.entered = false;
-};
+  console.log(greyouts);
+}
