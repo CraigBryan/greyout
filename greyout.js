@@ -1,56 +1,55 @@
-//Script to have nice caption text fade in over an image
-//TODO remove jquery dependency?
+//Script to have nice caption html fade in over an image
 
-function Greyout(obj, captionHtml)
+(function($)
 {
-  var that = this;
-
-  this.greyout = function() 
+  jQuery.fn.greyout = function(options)
   {
-    if(!that.entered)
+    var entered = false;
+    var greybox = null;
+    var $this = this;
+
+    var settings = $.extend({
+      caption: "default greyout caption"
+    }, options);
+
+    var greyout = function()
     {
-      that.entered = true;
-      var width = that.element.width();
-      var height = that.element.height();
-      var left = that.element.offset().left;
-      var top = that.element.offset().top;
-      var zIndex = that.element.css('z-index');
-      var text = that.element.attr('data-greyout');
-
-      if(zIndex !== "auto")
+      if(!entered)
       {
-        zIndex = parseInt(zIndex) + 1;
+        entered = true;
+        var width = $this.width();
+        var height = $this.height();
+        var left = $this.offset().left;
+        var top = $this.offset().top;
+        var zIndex = $this.css('z-index');
+
+        if(zIndex !== "auto")
+        {
+          zIndex = parseInt(zIndex) + 1;
+        }
+
+        var greybox_markup = "<div style='width:" + width 
+          + "; height:" + height 
+          + "; left:" + left 
+          + "; top:" + top 
+          + "; z-index:" + zIndex 
+          + ";' class='greyout-box'></div>";
+
+        greybox = $this.after(greybox_markup).next();
+        greybox.html(options['caption']);
+        greybox.mouseleave(greyin);
       }
+    };
 
-      var greybox_markup = "<div style='width:" + width 
-        + "; height:" + height 
-        + "; left:" + left 
-        + "; top:" + top 
-        + "; z-index:" + zIndex 
-        + ";' class='greyout-box'></div>";
+    var greyin = function()
+    {
+      greybox.remove();
+      entered = false;
+    };
 
-      that.greybox = that.element.after(greybox_markup).next();
-      that.greybox.html(captionHtml);
-      that.greybox.mouseleave(that.greyin);
-    }
+    this.mouseenter(greyout);
+
+    return this;
   };
 
-  this.greyin = function()
-  {
-    that.greybox.remove();
-    that.entered = false;
-  };
-
-  this.element = null;
-  this.id = null;
-  this.entered = false;
-  this.greybox = null;
-
-  this.element = obj;
-  this.element.mouseenter(this.greyout);
-}
-
-function check()
-{
-  console.log(greyouts);
-}
+}(jQuery));

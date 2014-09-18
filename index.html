@@ -5,7 +5,7 @@
     <script type="text/javascript" src="jquery/jquery-ui.min.js"> </script>
     <script rel="stylesheet" type="text/css" href="jquery/jquery-ui.min.css" />
     <script type="text/javascript" src="jquery/jquery-1.11.1.min.js"> </script>
-    <script type="text/javascript" src="greyout.js"> </script>
+    <script type="text/javascript" src="greyout-jquery.js"> </script>
   </head>
 
   <body>
@@ -28,8 +28,8 @@
   </body>
 
   <script type="text/javascript">
-    new Greyout(jQuery("#test1"), "<div class='caption-box'><p>This is the caption stuff!</p></div>");
-    new Greyout(jQuery("#test2"), "<div class='caption-box'><h1>Adventure Time!</h1></div>");
+    jQuery("#test1").greyout({caption: "<div class='caption-box'><p>This is the caption stuff!</p></div>"});
+    jQuery("#test2").greyout({caption: "<div class='caption-box'><h1>Adventure Time!</h1></div>"});
   </script>
 
 </html>
